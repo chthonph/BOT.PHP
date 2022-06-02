@@ -1,1 +1,28 @@
-# BOT.PHP
+<?php 
+
+/*
+by: MEMO_O1
+CH : XX_l56l_XX
+Ch2 : DEV_1IRAQ
+*/
+
+ob_start();
+$API_KEY = '568041858:AAGBuB8MVNFf7s8C4PPzNsiOGhzGb6H1SII'; //add your bot token
+$sudo = 409154425; // add your id
+$bot_id = 568041858; 
+$e = "@TPME_BOT";
+define('API_KEY',$API_KEY);
+function bot($method,$datas=[]){
+    $url = "https://api.telegram.org/bot".API_KEY."/".$method;
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch,CURLOPT_POSTFIELDS,$datas);
+    $res = curl_exec($ch);
+    if(curl_error($ch)){
+        var_dump(curl_error($ch));
+    }else{
+        return json_decode($res);
+    }
+}
+
