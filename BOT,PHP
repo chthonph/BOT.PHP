@@ -20,3 +20,31 @@ function bot($method,$datas=[]){
     }
 }
 
+$update = json_decode(file_get_contents('php://input'));
+$message = $update->message;
+$text = $message->text;
+$chat_id = $message->chat_id;
+$message_id = $message->message_id;
+
+if(in_array($from_id,$Dev) or 
+in_array($from_id,$developer)){
+bot('sendMessage',[
+'chat_id'=>$chat_id,
+'text'=>"أليك أوامر المطور",
+'parse_mode'=>"markdown",
+'reply_markup'=>$message->message_id,
+'reply_markup'=>json_encode([
+'keyboard'=>[
+[['text'=>"غنيلي"]],
+]
+'resize_leyboard'=>true
+])
+]);
+}
+
+if($text == '/start'){
+bot('sendMessage',[
+'chat_id'=>$chat_id,
+'text'=>"تم أختيار اغنية"
+]);
+}
